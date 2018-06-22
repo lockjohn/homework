@@ -8,7 +8,7 @@ class Stack
     end
 
     def pop
-      @stack.shift(el)# removes one element from the stack
+      @stack.shift# removes one element from the stack
     end
 
     def peek
