@@ -1,3 +1,4 @@
+require 'byebug'
 class Board
   attr_accessor :cups
 
@@ -27,7 +28,7 @@ class Board
   end
 
   def valid_move?(start_pos)
-    if start_pos > 0 || start_pos > 13
+    if start_pos < 0 || start_pos > 13
       raise "Invalid starting cup"
     end
     if @cups[start_pos].empty?
@@ -37,20 +38,26 @@ class Board
 
   def make_move(start_pos, current_player_name)
     valid_move?(start_pos) #either raises error or just passes through
-    current_player_name == @player1 ? skip = @cups[13] : skip = @cups[6]
+    # debugger
+    current_player_name == @player1 ? skip = 13 : skip = 6
     stones = cups[start_pos].length
     @cups[start_pos] = [] #empties
-      stones.times do |s|
-        pos = (start_pos + s) % 14
-        if @cups[pos] == skip
-          @cups[pos+1] << :stone
+    i = 1
+      stones.times do |s| #s starts at zero
+        pos = (start_pos + i) % 14
+        if pos == skip
+           @cups[(pos+1)%14]  << :stone
+           i+=1
         else
           @cups[pos] << :stone
         end
+        i+=1
       end
+    p cups
     ending_cup_idx = (start_pos + stones) % 14
+    render
     return :switch if cups[ending_cup_idx].length == 1
-    return :prompt if cups[ending_cup_idx] = skip
+    return :prompt if cups[ending_cup_idx] == skip
     next_turn(ending_cup_idx) #should only get here if
   end
 
