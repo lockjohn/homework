@@ -35,6 +35,8 @@ Rails.application.configure do
 
   config.action_mailer.perform_caching = false
 
+  #set an optoin here so that mailer knows the base url of the website:
+  config.action_mailer.default_url_options = { host: 'localhost:3000'}
   # Print deprecation notices to the Rails logger.
   config.active_support.deprecation = :log
 

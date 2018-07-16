@@ -1,5 +1,8 @@
 class User < ApplicationRecord
   #we use password even tho we don't have that column name, just sets the password_digest column
+  validates :username, presence: true
+  validates :password_digest, presence 
+
   def password=(password)
     self.password_digest = BCrypt::Password.create(password)
   end
