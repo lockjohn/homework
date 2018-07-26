@@ -17,9 +17,23 @@ document.addEventListener("DOMContentLoaded", () => {
 
 
   // adding SF places as list items
+  const submitFavs = (e) => {
+    e.preventDefault();
 
-  // --- your code here!
+    const favoriteInput = document.querySelector(".favorite-input");
+    const favorite = favoriteInput.value;
+    favoriteInput.value = "";
 
+    const newLi = document.createElement("li");
+    newLi.textContent = favorite;
+
+    const favoritesList = document.getElementById("sf-places");
+    favoritesList.appendChild(newLi);
+  }
+
+  const listSubmitButton = document.querySelector(".favorite-submit");
+  // add event listener to the submit button with that class that calls 
+  listSubmitButton.addEventListener("click", submitFavs);
 
 
   // adding new photos
