@@ -4,6 +4,14 @@ import configureStore from './store/store';
 
 import Root from './components/root';
 
+function addLoggingToDispatch(store) {
+  return function (next) {
+    return function (action) {
+      
+    };
+  };
+};
+
 document.addEventListener('DOMContentLoaded', () => {
   const preloadedState = localStorage.state ?
     JSON.parse(localStorage.state) : {};
